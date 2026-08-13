@@ -8,7 +8,6 @@ import '@fontsource/jetbrains-mono/400.css';  // Mono
 
 <template >
   <div class="min-h-screen w-full bg-background overflow-x-hidden">
-    <NuxtRouteAnnouncer/>
-    <NuxtWelcome/>
+    <LayoutNavbar/>
   </div>
 </template>
