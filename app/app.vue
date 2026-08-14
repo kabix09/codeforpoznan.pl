@@ -11,5 +11,6 @@ import '@fontsource/jetbrains-mono/400.css';  // Mono
     <LayoutNavbar/>
     <SectionsHero/>
     <SectionsAbout/>
+    <SectionsHow/>
   </div>
 </template>
