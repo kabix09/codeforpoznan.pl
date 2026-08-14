@@ -12,5 +12,6 @@ import '@fontsource/jetbrains-mono/400.css';  // Mono
     <SectionsHero/>
     <SectionsAbout/>
     <SectionsHow/>
+    <SectionsJoin/>
   </div>
 </template>
