@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { X, ExternalLink, ArrowUpRight, ChevronLeft, ChevronRight } from "@lucide/vue";
 import TimelineCard from '~/components/layout/TimelineCard.vue'
+import TimelinePopup from '~/components/layout/TimelinePopup.vue'
 
 import projects from '~/constants/projects'
 import type Project from '~/types/projects'
@@ -51,14 +52,14 @@ const scroll = (dir: "left" | "right") => {
         <button
           @click="scroll('left')"
           aria-label="Poprzedni"
-          class="w-10 h-10 border border-[#E4E2DC] bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
+          class="w-10 h-10 border border-border bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
         >
           <ChevronLeft :size="18" />
         </button>
         <button
           @click="scroll('right')"
           aria-label="Następny"
-          class="w-10 h-10 border border-[#E4E2DC] bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
+          class="w-10 h-10 border border-border bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
         >
           <ChevronRight :size="18" />
         </button>
@@ -157,5 +158,10 @@ const scroll = (dir: "left" | "right") => {
         </div>
     </div>
     </div>
+
+    <TimelinePopup 
+      :project="active" 
+      @close="active = null" 
+    />
   </section>
 </template>
