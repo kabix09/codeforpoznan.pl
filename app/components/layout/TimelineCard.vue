@@ -34,7 +34,7 @@ const sc = computed(() => {
     <!-- Image -->
     <div class="h-36 overflow-hidden bg-white">
       <NuxtImg
-        fetchpriority="lazy"
+        loading="lazy"
         :src="img"
         :alt="`Projekt Code for Poznań: ${project.name}`"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

@@ -18,19 +18,17 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-const { gtag } = useGtag() // Używamy wbudowanego hooka zamiast window.gtag!
+const { gtag } = useGtag()
 
-const isAnswered = ref(true) // Domyślnie ukryte, żeby nie mrugało przy SSR
+const isAnswered = ref(true)
 
 onMounted(() => {
-  // Sprawdzamy, czy użytkownik już dokonał wyboru
   if (!localStorage.getItem('cookie-consent')) {
     isAnswered.value = false
   }
 })
 
 const accept = () => {
-  // To magiczne wywołanie aktualizuje status w GA4 na "granted" i puszcza tracking
   gtag('consent', 'update', {
     analytics_storage: 'granted',
   })

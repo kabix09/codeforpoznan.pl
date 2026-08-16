@@ -1,11 +1,12 @@
 <script setup>
-import { Slack } from 'lucide-vue-next';
+import { useTracking } from '~/composables/useTracking'
 
-const socials = [
+const { trackJoin } = useTracking();
+
+const social = [
   {
     label: 'Slack',
-    href: 'https://slack.com',
-    icon: Slack
+    href: 'https://codeforpoznan.slack.com/',
   }
 ];
 </script>
@@ -26,6 +27,8 @@ const socials = [
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Slack"
+                        :title="`Dołącz do anału na ${social.label}`"
+                        @click="trackJoin(`community_${social.label.toLowerCase()}`)"
                         class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-white sm:shrink-0"
                     >
                         <svg

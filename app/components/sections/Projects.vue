@@ -7,6 +7,10 @@ import TimelinePopup from '~/components/layout/TimelinePopup.vue'
 import projects from '~/constants/projects'
 import type Project from '~/types/projects'
 
+import { useTracking } from '~/composables/useTracking'
+
+const { trackProjectsScroll, trackGithub, trackProjectOpen } = useTracking()
+
 // Definicje typów i danych (zakładając, że projects i projectImages są zaimportowane)
 const active = ref<Project | null>(null);
 
@@ -22,7 +26,14 @@ const scroll = (dir: "left" | "right") => {
     left: dir === "right" ? STEP * 2 : -STEP * 2,
     behavior: "smooth",
   });
+
+  trackProjectsScroll();
 };
+
+const handleOpenProject = (p: Project) => {
+  active.value = p
+  trackProjectOpen(p.name)
+}
 </script>
 
 <style>
@@ -51,14 +62,14 @@ const scroll = (dir: "left" | "right") => {
       <div class="flex items-center gap-3">
         <button
           @click="scroll('left')"
-          aria-label="Poprzedni"
+          aria-label="Przewiń projekty w lewo"
           class="w-10 h-10 border border-border bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
         >
           <ChevronLeft :size="18" />
         </button>
         <button
           @click="scroll('right')"
-          aria-label="Następny"
+          aria-label="Przewiń projekty w prawo"
           class="w-10 h-10 border border-border bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
         >
           <ChevronRight :size="18" />
@@ -67,6 +78,7 @@ const scroll = (dir: "left" | "right") => {
           href="https://github.com/CodeForPoznan"
           target="_blank"
           rel="noopener noreferrer"
+          @click="trackGithub('all_projects_link')"
           style="font-weight: 600;"
           class="font-display flex items-center gap-1.5 text-foreground text-sm hover:text-primary transition-colors"
         >
@@ -78,11 +90,11 @@ const scroll = (dir: "left" | "right") => {
     <!-- ── Horizontal timeline ── -->
     <div
         ref="scrollRef"
-        class="overflow-x-auto pb-10"
+        class="overflow-x-auto pb-10 hide-scroll"
         :style="{ scrollbarWidth: 'none', msOverflowStyle: 'none' }"
     >
     <div
-        class="relative inline-flex flex-col hide-scroll"
+        class="relative inline-flex flex-col"
         :style="{
             minWidth: `${projects.length * STEP + 96}px`,
             paddingLeft: '48px',
@@ -101,7 +113,7 @@ const scroll = (dir: "left" | "right") => {
                 v-if="i % 2 === 0"
                 :project="p"
                 :img="p.image"
-                @open="active = p"
+                @open="handleOpenProject(p)"
             />
             <div v-else :style="{ height: '300px' }" />
             <div
@@ -113,8 +125,8 @@ const scroll = (dir: "left" | "right") => {
 
         <!-- Axis -->
         <div class="relative flex items-center" :style="{ height: '28px' }">
-        <div class="absolute inset-y-1/2 left-0 right-0 h-px bg-[#E4E2DC]" />
-        <div class="relative flex w-full" :style="{ gap: `${CARD_GAP}px` }">
+          <div class="absolute inset-y-1/2 left-0 right-0 h-px bg-[#E4E2DC]" />
+          <div class="relative flex w-full" :style="{ gap: `${CARD_GAP}px` }">
             <div
                 v-for="p in projects"
                 :key="p.id"
@@ -122,9 +134,9 @@ const scroll = (dir: "left" | "right") => {
                 class="flex flex-col items-center relative"
             >
             <button
-                @click="active = p"
+                @click="handleOpenProject(p)"
                 class="w-4 h-4 rounded-full border-2 border-[#1AA7F0] bg-white hover:bg-[#F7F6F3] transition-colors relative z-10 flex-shrink-0 shadow-sm shadow-[#1AA7F0]/20"
-                :aria-label="p.name"
+                :aria-label="`Wybierz projekt: ${p.name}`"
             />
             <span
                 class="font-mono absolute top-5 text-[#1AA7F0] text-[10px] whitespace-nowrap left-1/2 -translate-x-1/2"
@@ -132,7 +144,7 @@ const scroll = (dir: "left" | "right") => {
                 {{ p.date }}
             </span>
             </div>
-        </div>
+          </div>
         </div>
 
         <!-- Bottom cards (odd) -->
@@ -151,7 +163,7 @@ const scroll = (dir: "left" | "right") => {
                 v-if="i % 2 !== 0"
                 :project="p"
                 :img="p.image"
-                @open="active = p"
+                @open="handleOpenProject(p)"
             />
             <div v-else :style="{ height: '300px' }" />
         </div>

@@ -3,6 +3,9 @@ import { ref } from 'vue'
 import { Check, Code, PaintbrushVertical, BarChart2, ClipboardPenLine } from '@lucide/vue';
 import { useForm, Field } from 'vee-validate'
 import * as yup from 'yup'
+import { useTracking } from '~/composables/useTracking'
+
+const { trackFormTabChange, trackFormSubmit } = useTracking()
 
 // Typ formularza: 'join' lub 'issue'
 const formType = ref('join')
@@ -49,6 +52,8 @@ const switchFormType = (type) => {
     submited.value = false
     resetForm()
     selected.value = []
+
+    trackFormTabChange(type)
 }
 
 const onSubmit = handleSubmit((values) => {
@@ -59,6 +64,9 @@ const onSubmit = handleSubmit((values) => {
     console.log('Dane formularza:', finalData)
     // TODO handle API request to send the form data
     submited.value = true
+
+    //Wysyłamy do GA4 informację o zdobyciu leada (wolontariusz lub zgłoszenie)
+    trackFormSubmit(formType.value)
 })
 </script>
 
@@ -69,7 +77,7 @@ const onSubmit = handleSubmit((values) => {
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-8 items-start">
 
                 <div>
-                    <h2 class="font-body text-lg font-bold text-primary leading-8">Napisz do nas!</h2>
+                    <p class="font-body text-lg font-bold text-primary leading-8">Napisz do nas!</p>
 
                     <h2
                         class="mt-6 font-display font-extrabold text-4xl lg:text-5xl text-foreground leading-[1.08] tracking-[-0.03em] mb-6"
@@ -85,7 +93,8 @@ const onSubmit = handleSubmit((values) => {
                     
                     <div class="overflow-hidden hidden lg:block">
                         <!-- source: https://www.getyourguide.com/pl-pl/poznan-town-hall-l167009/?visitor-id=8M9FHJVOK1ISNQ39TTHJ5LT1DZWZF03Z&locale_autoredirect_optout=true -->
-                        <img
+                        <NuxtImg
+                            loading="lazy"
                             src="https://cdn.getyourguide.com/image/format=auto,fit=crop,gravity=auto,quality=60,width=400,height=265,dpr=2/tour_img/5ed0ef8ce1224.jpeg"
                             alt="Zespół podczas spotkania"
                             class="w-full object-cover hover:scale-[1.02] transition-transform duration-700"
@@ -95,7 +104,7 @@ const onSubmit = handleSubmit((values) => {
                 </div>
 
                 <div class="flex flex-col mt-3">
-                    <div class="flex justify-center gap-2">
+                    <div class="flex justify-center gap-2" role="tablist">
                         <button
                             type="button"
                             @click="switchFormType('join')"

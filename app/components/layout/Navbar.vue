@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { Menu, X,} from '@lucide/vue'
+import { useTracking } from '~/composables/useTracking'
+
+const { trackJoin } = useTracking()
 
 const navLinks = [
   { label: 'Strona główna', href: '#' },
@@ -62,7 +65,9 @@ const closeMenu = () => {
                         <a href="https://www.linkedin.com/company/codeforpoznan/" 
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="LinkedIn" class="hover:text-primary transition-colors"
+                            aria-label="LinkedIn" 
+                            @click="trackJoin('nav_linkedin')"
+                            class="hover:text-primary transition-colors"
                         >
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
@@ -73,6 +78,7 @@ const closeMenu = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Facebook" 
+                            @click="trackJoin('nav_facebook')"
                             class="hover:text-primary transition-colors"
                         >
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -82,6 +88,7 @@ const closeMenu = () => {
                     </div>
                     <a
                         href="#dolacz-do-nas"
+                        @click="trackJoin('nav_support_desktop')"
                         :style="{ fontWeight: 700 }"
                         class="font-display font-bold bg-primary text-white px-5 py-2 text-sm hover:bg-primary-active transition-colors"
                     >
@@ -112,9 +119,9 @@ const closeMenu = () => {
 
                 <a 
                     href="#dolacz-do-nas" 
-                    @click="isOpen = false"
+                    @click="() => { isOpen = false; trackJoin('nav_support_mobile'); }"
                     :style="{ fontWeight: 700 }" 
-                    class="font-display font-bold bg-primary text-white px-5 py-2.5 text-sm text-center hover:bg-primary-active transition-colors mt-1"
+                    class="font-display font-bold bg-primary text-white px-5 py-2.5 text-sm text-center hover:bg-primary-active transition-colors mt-1 rounded"
                 >
                     Wesprzyj nas
                 </a>
