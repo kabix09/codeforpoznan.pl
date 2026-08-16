@@ -13,6 +13,10 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/codeforpoznan.pl/' : '/',
+    nitro: {
+      preset: 'github-pages'
+    },
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
