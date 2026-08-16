@@ -9,7 +9,7 @@ const stats = [
 </script>
 
 <template>        
-    <section class="relative pt-16 bg-background overflow-hidden">
+    <header role="banner" class="relative pt-16 bg-background overflow-hidden">
         <div class="absolute inset-y-0 right-0 w-1/2 bg-secondary hidden lg:block"></div>
             
         <div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[92vh]">
@@ -29,7 +29,7 @@ const stats = [
 
                  <div class="flex flex-wrap gap-3 mb-16">
                     <a
-                        href="#doloacz-do-nas"
+                        href="#dolacz-do-nas"
                         class="font-display font-bold bg-primary text-white px-7 py-3.5 text-sm hover:bg-primary-active transition-colors"
                     >
                         Dołącz do nas
@@ -62,7 +62,7 @@ const stats = [
             
             <div class="hidden lg:block py-12">
                 <div class="overflow-hidden shadow-xl shadow-[#0D1B2A]/45">
-                    <img
+                    <NuxtImg fetchpriority="high" preload="true"
                         src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&h=560&fit=crop&auto=format"
                         alt="Zespół Code for Poznań podczas pracy"
                         class="w-full object-cover"
@@ -84,5 +84,5 @@ const stats = [
                 </span>
             </div>
         </div>
-    </section>
+    </header>
 </template>
