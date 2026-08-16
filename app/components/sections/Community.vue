@@ -3,12 +3,11 @@ import { useTracking } from '~/composables/useTracking'
 
 const { trackJoin } = useTracking();
 
-const social = [
-  {
+const social =
+{
     label: 'Slack',
     href: 'https://codeforpoznan.slack.com/',
-  }
-];
+};
 </script>
 
 
@@ -23,7 +22,7 @@ const social = [
                 <!-- Kontener grupujący wszystkie ikony społecznościowe -->
                 <div class="flex items-center justify-center gap-3 text-muted-foreground">
                     <a
-                        href="https://slack.com"
+                        :href="social.href"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Slack"
