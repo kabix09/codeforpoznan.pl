@@ -40,6 +40,7 @@ const socials = [
 const links = [
   { href: "#o-nas", label: "O nas" },
   { href: "#jak-dzialamy", label: "Jak działamy" },
+  { href: "#spolecznosc", label: "Społeczność" },
   { href: "#nasze-projekty", label: "Projekty" },
 ]
 

@@ -1,0 +1,11 @@
+{
+  "runners": [
+    "axe"
+  ],
+  "standard": "WCAG2AA",
+  "timeout": 10000,
+  "ignore": [
+    "color-contrast",
+    "WCAG2AA.Principle2.Guideline2_4.2_4_3.H25.1.NoHeadingContent"
+  ]
+}
