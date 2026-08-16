@@ -5,7 +5,7 @@ import { ref } from 'vue'
 
 
 <template>
-    <section id="how" class="bg-footer py-24 lg:py-24 border-t border-border">
+    <section id="jak-dzialamy" class="bg-footer py-24 lg:py-24 border-t border-border">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="sm:text-center">
                 <h2 class="text-lg font-body font-semibold leading-8 text-primary">Jak działamy</h2>

@@ -1,17 +1,16 @@
 <script setup>
 import { ref } from 'vue'
-import { Check, Code, PaintbrushVertical, BarChart2, ClipboardPenLine } from '@lucide/vue';
+import { Check, Code, PaintbrushVertical, BarChart2, ClipboardPenLine } from 'lucide-vue-next'; // Zmieniono import na lucide-vue-next (spójność z Navbar)
 import { useForm, Field } from 'vee-validate'
 import * as yup from 'yup'
 import { useTracking } from '~/composables/useTracking'
 
 const { trackFormTabChange, trackFormSubmit } = useTracking()
 
-// Typ formularza: 'join' lub 'issue'
 const formType = ref('join')
 
 const roles = [
-  { id: "dev",    label: "Developer",      icon: Code,     desc: "Frontend, backend, mobile" },
+  { id: "dev",    label: "Developer",       icon: Code,     desc: "Frontend, backend, mobile" },
   { id: "design", label: "Designer",        icon: PaintbrushVertical,    desc: "UX/UI, grafika, badania" },
   { id: "test",   label: "Tester",          icon: BarChart2, desc: "Testowanie, debugowanie" },
   { id: "pm",     label: "Project Manager", icon: ClipboardPenLine,   desc: "Zarządzanie, koordynacja" },
@@ -19,7 +18,6 @@ const roles = [
 
 const submited = ref(false)
 
-// Dynamiczny schemat walidacji w zależności od wybranego trybu
 const schema = yup.object({
     name: yup.string().required('Imię i nazwisko jest wymagane'),
     email: yup.string().email('Niepoprawny format adresu e-mail').required('E-mail jest wymagany'),
@@ -46,7 +44,6 @@ const toggle = (id) => {
     }
 }
 
-// Przełączanie między formularzami czyszczące stan błędów/formularza
 const switchFormType = (type) => {
     formType.value = type
     submited.value = false
@@ -63,9 +60,9 @@ const onSubmit = handleSubmit((values) => {
 
     console.log('Dane formularza:', finalData)
     // TODO handle API request to send the form data
+    
     submited.value = true
 
-    //Wysyłamy do GA4 informację o zdobyciu leada (wolontariusz lub zgłoszenie)
     trackFormSubmit(formType.value)
 })
 </script>
@@ -79,9 +76,7 @@ const onSubmit = handleSubmit((values) => {
                 <div>
                     <p class="font-body text-lg font-bold text-primary leading-8">Napisz do nas!</p>
 
-                    <h2
-                        class="mt-6 font-display font-extrabold text-4xl lg:text-5xl text-foreground leading-[1.08] tracking-[-0.03em] mb-6"
-                    >
+                    <h2 class="mt-6 font-display font-extrabold text-4xl lg:text-5xl text-foreground leading-[1.08] tracking-[-0.03em] mb-6">
                         Zmień swoje<br />
                         <span class="text-primary">miasto</span>
                     </h2>
@@ -92,7 +87,6 @@ const onSubmit = handleSubmit((values) => {
                     </p>
                     
                     <div class="overflow-hidden hidden lg:block">
-                        <!-- source: https://www.getyourguide.com/pl-pl/poznan-town-hall-l167009/?visitor-id=8M9FHJVOK1ISNQ39TTHJ5LT1DZWZF03Z&locale_autoredirect_optout=true -->
                         <NuxtImg
                             loading="lazy"
                             src="https://cdn.getyourguide.com/image/format=auto,fit=crop,gravity=auto,quality=60,width=400,height=265,dpr=2/tour_img/5ed0ef8ce1224.jpeg"
@@ -107,6 +101,8 @@ const onSubmit = handleSubmit((values) => {
                     <div class="flex justify-center gap-2" role="tablist">
                         <button
                             type="button"
+                            role="tab"
+                            :aria-selected="formType === 'join'"
                             @click="switchFormType('join')"
                             :class="[
                                 'w-[calc(50%-5rem)] py-3 text-sm font-body font-bold transition-all rounded-t-lg border-t border-x text-center',
@@ -119,6 +115,8 @@ const onSubmit = handleSubmit((values) => {
                         </button>
                         <button
                             type="button"
+                            role="tab"
+                            :aria-selected="formType === 'issue'"
                             @click="switchFormType('issue')"
                             :class="[
                                 'w-[calc(50%-5rem)] py-3 text-sm font-body font-bold transition-all rounded-t-lg border-t border-x text-center',
@@ -144,6 +142,7 @@ const onSubmit = handleSubmit((values) => {
                                     Skontaktujemy się Tobą wkrótce. <br /> Witaj w zespole!
                                 </p>
                             </div>
+                            
                             <div v-show="!submited" class="col-start-1 row-start-1">
                                 <!-- https://formspree.io/f/mnqvydqv -->
                                 <form @submit.prevent="onSubmit" class="flex flex-col gap-5">
@@ -152,11 +151,12 @@ const onSubmit = handleSubmit((values) => {
                                     </h3>
 
                                     <div class="flex flex-col gap-1.5">
-                                        <label class="font-bold text-foreground text-sm font-medium">
+                                        <label for="form_name" class="font-bold text-foreground text-sm font-medium">
                                             Imię i nazwisko *
                                         </label>
                                         <Field name="name" v-slot="{ field, errorMessage }">
                                             <input
+                                                id="form_name"
                                                 v-bind="field"
                                                 type="text"
                                                 class="font-body bg-background border text-foreground px-4 py-3 text-sm focus:outline-none transition-colors placeholder:text-[#B8B2A8]"
@@ -168,11 +168,12 @@ const onSubmit = handleSubmit((values) => {
                                     </div>
 
                                     <div class="flex flex-col gap-1.5">
-                                        <label class="font-body text-foreground text-sm font-medium">
+                                        <label for="form_email" class="font-body text-foreground text-sm font-medium">
                                             E-mail *
                                         </label>
                                         <Field name="email" v-slot="{ field, errorMessage }">
                                             <input
+                                                id="form_email"
                                                 v-bind="field"
                                                 type="email"
                                                 class="bg-background border text-foreground px-4 py-3 text-sm focus:outline-none transition-colors placeholder:text-[#B8B2A8]"
@@ -184,11 +185,12 @@ const onSubmit = handleSubmit((values) => {
                                     </div>
 
                                     <div v-if="formType === 'issue'" class="flex flex-col gap-1.5">
-                                        <label class="font-body text-foreground text-sm font-medium">
+                                        <label for="form_phone" class="font-body text-foreground text-sm font-medium">
                                             Telefon (opcjonalnie)
                                         </label>
                                         <Field name="phone" v-slot="{ field, errorMessage }">
                                             <input
+                                                id="form_phone"
                                                 v-bind="field"
                                                 type="tel"
                                                 class="bg-background border text-foreground px-4 py-3 text-sm focus:outline-none transition-colors placeholder:text-[#B8B2A8]"
@@ -208,6 +210,7 @@ const onSubmit = handleSubmit((values) => {
                                                 v-for="{ id, label, icon: Icon, desc } in roles"
                                                 :key="id"
                                                 type="button"
+                                                :aria-pressed="selected.includes(id)"
                                                 @click="toggle(id)"
                                                 :class="[
                                                     'text-left p-4 border transition-all',
@@ -216,27 +219,28 @@ const onSubmit = handleSubmit((values) => {
                                                     : 'border-border hover:border-primary bg-background'
                                                 ]"
                                             >
-                                            <component 
-                                                :is="Icon" 
-                                                :size="16" 
-                                                :class="['mb-2', selected.includes(id) ? 'text-primary' : 'text-muted-foreground']" 
-                                            />
-                                            <div :style="{ fontFamily: DISPLAY, fontWeight: 600 }" class="text-foreground text-sm">
-                                                {{ label }}
-                                            </div>
-                                            <div class="text-muted-foreground text-xs mt-0.5">
-                                                {{ desc }}
-                                            </div>
+                                                <component 
+                                                    :is="Icon" 
+                                                    :size="16" 
+                                                    :class="['mb-2', selected.includes(id) ? 'text-primary' : 'text-muted-foreground']" 
+                                                />
+                                                <div class="font-display font-semibold text-foreground text-sm">
+                                                    {{ label }}
+                                                </div>
+                                                <div class="text-muted-foreground text-xs mt-0.5">
+                                                    {{ desc }}
+                                                </div>
                                             </button>
                                         </div>
                                     </div>
 
                                     <div v-if="formType === 'issue'" class="flex flex-col gap-1.5">
-                                        <label class="font-body text-foreground text-sm font-medium">
+                                        <label for="form_message" class="font-body text-foreground text-sm font-medium">
                                             Wiadomość *
                                         </label>
                                         <Field name="message" v-slot="{ field, errorMessage }">
                                             <textarea
+                                                id="form_message"
                                                 v-bind="field"
                                                 rows="4"
                                                 class="bg-background border text-foreground px-4 py-3 text-sm focus:outline-none transition-colors placeholder:text-[#B8B2A8] resize-none"
@@ -249,8 +253,7 @@ const onSubmit = handleSubmit((values) => {
 
                                     <button
                                         type="submit"
-                                        :style="{ fontFamily: DISPLAY, fontWeight: 700 }"
-                                        class="mt-1 bg-primary text-white px-8 py-3.5 text-sm hover:bg-[#1AA7F0]/90 transition-colors"
+                                        class="mt-1 font-display font-bold bg-primary text-white px-8 py-3.5 text-sm hover:bg-[#1AA7F0]/90 transition-colors"
                                     >
                                         {{ formType === 'join' ? 'Dołącz do zespołu' : 'Wyślij zgłoszenie' }}
                                     </button>
