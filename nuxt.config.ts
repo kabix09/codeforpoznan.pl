@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap', // Generuje sitemap.xml
     '@nuxtjs/robots',  // Generuje robots.txt
     'nuxt-gtag',       // Nowoczesny moduł GA4 dla Nuxt 3 (zamiast starego google-analytics)
-    // '@nuxt/image'      // Optymalizacja obrazków (konieczne jeśli masz obrazki)
+    '@nuxt/image'      // Optymalizacja obrazków (konieczne jeśli masz obrazki)
   ],
   site: {
     url: 'https://codeforpoznan.pl',
@@ -60,6 +60,18 @@ export default defineNuxtConfig({
         disallow: ['/admin', '/api'],
         allow: '/'
       }
+    ]
+  },
+  // ==========================================
+  // Image Optimization (critical for CWV)
+  // ==========================================
+  image: {
+    // Automatyczna konwersja do nowoczesnych formatów
+    format: ['webp', 'avif', 'jpg'],
+    // Konfiguracja dla zewnętrznych obrazków (jeśli ciągniecie np. zdjęcia z GitHuba lub Unsplash)
+    domains: [
+      'images.unsplash.com', // Skoro używasz unsplash w swoim sekcji Hero, to musi tu być!
+      'avatars.githubusercontent.com' // Przydatne, gdy w sekcji 'O nas' dacie awatary z GitHuba
     ]
   },
 })

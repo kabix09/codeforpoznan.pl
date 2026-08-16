@@ -31,7 +31,12 @@ const emit = defineEmits<{
           </button>
 
           <div class="h-64 sm:h-72 w-full bg-white">
-            <img :src="project.image" :alt="project.name" class="w-full h-full object-cover" />
+            <NuxtImg 
+              loading="lazy"
+              :src="project.image" 
+              :alt="`Projekt Code for Poznań: ${project.name}`" 
+              class="w-full h-full object-cover"
+            />
           </div>
 
           <div class="p-6 sm:p-8">

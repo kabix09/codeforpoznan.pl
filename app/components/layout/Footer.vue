@@ -101,7 +101,7 @@ const year = new Date().getFullYear()
                 <p class="font-body text-muted-foreground text-sm mb-1">hello@codeforpoznan.pl</p>
                 <p class="font-body text-muted-foreground text-sm mb-8">Poznań, Polska</p>
                 <a
-                    href="#doloacz-do-nas"
+                    href="#dolacz-do-nas"
                     class="font-display font-bold inline-block bg-primary text-white px-6 py-2.5 text-sm hover:bg-primary-active transition-colors"
                 >
                     Wesprzyj nas
