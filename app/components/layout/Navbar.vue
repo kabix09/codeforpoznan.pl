@@ -4,10 +4,10 @@ import { Menu, X,} from '@lucide/vue'
 
 const navLinks = [
   { label: 'Strona główna', href: '#' },
-  { href: "#about", label: "O nas" },
-  { href: "#how", label: "Jak działamy" },
-  { href: "#projects", label: "Projekty" },
-  { label: 'Kontakt', href: '#join' },
+  { href: "#o-nas", label: "O nas" },
+  { href: "#jak-dzialamy", label: "Jak działamy" },
+  { href: "#nasze-projekty", label: "Projekty" },
+  { href: '#wolontariat', label: 'Kontakt' },
 ]
 
 const isOpen = ref(false)
@@ -81,7 +81,7 @@ const closeMenu = () => {
                         </a>
                     </div>
                     <a
-                        href="#join"
+                        href="#dolacz-do-nas"
                         :style="{ fontWeight: 700 }"
                         class="font-display font-bold bg-primary text-white px-5 py-2 text-sm hover:bg-primary-active transition-colors"
                     >
@@ -111,7 +111,7 @@ const closeMenu = () => {
                 </NuxtLink>
 
                 <a 
-                    href="#join" 
+                    href="#dolacz-do-nas" 
                     @click="isOpen = false"
                     :style="{ fontWeight: 700 }" 
                     class="font-display font-bold bg-primary text-white px-5 py-2.5 text-sm text-center hover:bg-primary-active transition-colors mt-1"

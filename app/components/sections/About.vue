@@ -1,34 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-import { Zap, Users, Heart, Code } from '@lucide/vue';  
-
-const pillars = [
-  { 
-    icon: Zap,      
-    title: "Civic hacking", 
-    desc: "Organizujemy hackathony, warsztaty i spotkania networkingowe, podczas których rozwiązujemy realne problemy." 
-},
-  { 
-    icon: Users,    
-    title: "Współpraca", 
-    desc: "Współpracujemy z organizacjami non-profit i instytucjami edukacyjnymi, aby tworzyć wartościowe inicjatywy i wspierać rozwój technologiczny."
-  },
-  { 
-    icon: Code,   
-    title: "Open source",   
-    desc: "Tworzymy projekty open-source, które mają realny wpływ. Budujemy razem, by każdy mógł korzystać." /** Od aplikacji mobilnych po platformy internetowe, nasze projekty są dostępne dla wszystkich. */
-  },
-    { 
-    icon: Heart,    
-    title: "Wolontariat i pasja", 
-    desc: "Łączymy pasję programowania, designu i testowania z chęcią pomocy. Dajemy swój czas, by wspólnie budować lepszą przyszłość." 
-  },
-];
+import pillars from '~/constants/pilars'
 </script>
 
 
 <template>
-    <section id="about" class="bg-background py-24 lg:py-32 border-t border-border">
+    <section id="o-nas" class="bg-background py-24 lg:py-32 border-t border-border">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="sm:text-center">
                 <h2 class="text-lg font-body font-semibold leading-8 text-primary">O nas</h2>

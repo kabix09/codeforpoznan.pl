@@ -29,13 +29,13 @@ const stats = [
 
                  <div class="flex flex-wrap gap-3 mb-16">
                     <a
-                        href="#join"
+                        href="#doloacz-do-nas"
                         class="font-display font-bold bg-primary text-white px-7 py-3.5 text-sm hover:bg-primary-active transition-colors"
                     >
                         Dołącz do nas
                     </a>
                     <a
-                        href="#projects"
+                        href="#nasze-projekty"
                         :style="{ fontWeight: 600 }"
                         class="font-display border border-border text-foreground px-7 py-3.5 text-sm hover:border-foreground transition-colors"
                     >

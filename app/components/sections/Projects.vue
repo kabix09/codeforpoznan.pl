@@ -32,7 +32,7 @@ const scroll = (dir: "left" | "right") => {
 </style>
 
 <template>
-  <section id="projects" class="bg-secondary py-24 lg:py-24 border-t border-border">
+  <section id="nasze-projekty" class="bg-secondary py-24 lg:py-24 border-t border-border">
     <!-- Header -->
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
       <div>

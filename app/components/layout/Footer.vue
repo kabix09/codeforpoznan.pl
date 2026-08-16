@@ -35,9 +35,9 @@ const socials = [
 ]
 
 const links = [
-  { href: "#about", label: "O nas" },
-  { href: "#how", label: "Jak działamy" },
-  { href: "#projects", label: "Projekty" },
+  { href: "#o-nas", label: "O nas" },
+  { href: "#jak-dzialamy", label: "Jak działamy" },
+  { href: "#nasze-projekty", label: "Projekty" },
 ]
 
 const year = new Date().getFullYear()
@@ -45,7 +45,7 @@ const year = new Date().getFullYear()
 
 <template>
      <!-- foreground const for dark and light modes -->
-    <footer id="contact" class="bg-footer">
+    <footer id="wolontariat" class="bg-footer">
         <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                 <div class="flex items-center gap-2.5 mb-5">
@@ -101,7 +101,7 @@ const year = new Date().getFullYear()
                 <p class="font-body text-muted-foreground text-sm mb-1">hello@codeforpoznan.pl</p>
                 <p class="font-body text-muted-foreground text-sm mb-8">Poznań, Polska</p>
                 <a
-                    href="#join"
+                    href="#doloacz-do-nas"
                     class="font-display font-bold inline-block bg-primary text-white px-6 py-2.5 text-sm hover:bg-primary-active transition-colors"
                 >
                     Wesprzyj nas

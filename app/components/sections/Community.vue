@@ -12,7 +12,7 @@ const socials = [
 
 
 <template>
-    <section id="how" class="bg-background py-24 lg:py-24 border-t border-border">
+    <section id="spolecznosc" class="bg-background py-24 lg:py-24 border-t border-border">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="sm:text-center flex flex-col items-center">
                 <p class="mt-2 font-display font-extrabold text-2xl tracking-tight text-foreground sm:text-4xl mb-8">
