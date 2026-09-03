@@ -44,11 +44,10 @@ const rightSocials = [
 </script>
 
 <template>
-    <!-- Sekcja posiada overflow-hidden, więc przesunięte elementy nie stworzą paska przewijania (scrollbara) -->
-    <section id="spolecznosc" class="relative bg-background pt-24 lg:pt-24 overflow-hidden border-t border-border flex flex-col items-center pb-16">
+    <section id="spolecznosc" class="relative bg-background pt-24 lg:pt-24 overflow-hidden border-t border-border flex flex-col items-center">
         
         <div class="absolute top-16 sm:top-18 md:top-20 z-30 w-full flex justify-center px-6">
-            <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground bg-background px-4 sm:px-6">
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground px-4 sm:px-6 bg-background/10 backdrop-blur-md rounded-2xl">
                 Connect With Our Community
             </h2>
         </div>
@@ -61,15 +60,15 @@ const rightSocials = [
             <div class="relative w-full h-[280px] sm:h-[360px]" 
                  :style="{ maxWidth: circleConfig.left.containerWidth }">
                 
-                <!-- LAYER 1: Circle with clipping -->
-                <div class="absolute inset-0 overflow-hidden flex justify-center">
+                <!-- WARSTWA 1: Okrąg (USUNIĘTO overflow-hidden, aby góra koła swobodnie wchodziła pod tekst) -->
+                <div class="absolute inset-0 flex justify-center">
                     <div class="absolute bottom-12 sm:bottom-14 md:bottom-16 rounded-full border-2 border-primary/30 bg-gradient-to-t from-primary/5 to-transparent shadow-[inset_0_0_80px_rgba(59,130,246,0.05)] transition-all duration-700 hover:border-primary/50"
                          :style="{ width: circleConfig.left.circleSize, height: circleConfig.left.circleSize }">
                         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-48 h-48 bg-primary/20 blur-[60px] rounded-full pointer-events-none animate-pulse"></div>
                     </div>
                 </div>
 
-                <!-- LAYER 2: Icons without clipping -->
+                <!-- WARSTWA 2: Ikony bez ucięcia -->
                 <div class="absolute bottom-12 sm:bottom-14 md:bottom-16 w-full flex justify-center pointer-events-none">
                     <div class="relative" :style="{ width: circleConfig.left.circleSize, height: circleConfig.left.circleSize }">
                         <template v-for="social in leftSocials" :key="social.label">
@@ -114,7 +113,7 @@ const rightSocials = [
             <div class="relative w-full h-[280px] sm:h-[360px]"
                  :style="{ maxWidth: circleConfig.right.containerWidth }">
                 
-                <!-- LAYER 1: Circle with clipping -->
+                <!-- WARSTWA 1: Okrąg z ucięciem na dole (tu overflow-hidden zostaje) -->
                 <div class="absolute inset-0 overflow-hidden flex justify-center">
                     <div class="absolute top-12 sm:top-14 md:top-16 rounded-full border-2 border-primary/30 bg-gradient-to-b from-primary/5 to-transparent shadow-[inset_0_0_80px_rgba(59,130,246,0.05)] transition-all duration-700 hover:border-primary/50"
                          :style="{ width: circleConfig.right.circleSize, height: circleConfig.right.circleSize }">
@@ -122,7 +121,7 @@ const rightSocials = [
                     </div>
                 </div>
 
-                <!-- LAYER 2: Icons without clipping -->
+                <!-- WARSTWA 2: Ikony bez ucięcia -->
                 <div class="absolute top-12 sm:top-14 md:top-16 w-full flex justify-center pointer-events-none">
                     <div class="relative" :style="{ width: circleConfig.right.circleSize, height: circleConfig.right.circleSize }">
                         <template v-for="social in rightSocials" :key="social.label">
@@ -131,7 +130,7 @@ const rightSocials = [
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 :aria-label="social.label"
-                                :title="`Join us on ${social.label}`"
+                                :title="`Dołącz do nas na ${social.label}`"
                                 @click="trackJoin(`community_${social.label.toLowerCase()}`)"
                                 class="pointer-events-auto absolute z-20 group flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-primary text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]"
                                 :style="{ 
