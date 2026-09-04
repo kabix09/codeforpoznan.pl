@@ -109,7 +109,7 @@ const year = new Date().getFullYear()
                 <a
                     href="#dolacz-do-nas"
                     @click="trackJoin('footer_support')"
-                    class="font-display font-bold inline-block bg-primary text-white px-6 py-2.5 text-sm hover:bg-primary-active transition-colors"
+                    class="font-display font-bold inline-block bg-primary rounded-md text-white px-6 py-2.5 text-sm hover:bg-primary-active transition-colors"
                 >
                     Wesprzyj nas
                 </a>

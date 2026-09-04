@@ -35,15 +35,16 @@ const stats = [
                         href="#dolacz-do-nas"
                         @click="trackJoin('Hero_Button')"
                         title="Dołącz do naszego wolontariatu IT"
-                        class="font-display font-bold bg-primary text-white px-7 py-3.5 text-sm hover:bg-primary-active transition-colors"
+                        class="font-display font-bold bg-primary rounded-md text-white px-7 py-3.5 text-sm hover:bg-primary-active transition-colors"
+                        :style="{ transform: 'scaleY(0.9)' }"
                     >
                         Dołącz do nas
                     </a>
                     <a
                         href="#nasze-projekty"
                         @click="trackProjectsScroll"
-                        :style="{ fontWeight: 600 }"
-                        class="font-display border border-border text-foreground px-7 py-3.5 text-sm hover:border-foreground transition-colors"
+                        class="font-display border border-border rounded-md text-foreground px-7 py-3.5 text-sm hover:border-foreground transition-colors"
+                        :style="{ transform: 'scaleY(0.9)' }"
                     >
                         Nasze projekty
                     </a>
@@ -71,7 +72,7 @@ const stats = [
                     <NuxtImg fetchpriority="high" preload="true"
                         src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&h=560&fit=crop&auto=format"
                         alt="Zespół Code for Poznań podczas pracy"
-                        class="w-full object-cover"
+                        class="w-full object-cover rounded-xl"
                         :style="{ aspectRatio: '5/4' }"
                     />
                 </div>

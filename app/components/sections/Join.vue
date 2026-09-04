@@ -91,7 +91,7 @@ const onSubmit = handleSubmit((values) => {
                             loading="lazy"
                             src="https://cdn.getyourguide.com/image/format=auto,fit=crop,gravity=auto,quality=60,width=400,height=265,dpr=2/tour_img/5ed0ef8ce1224.jpeg"
                             alt="Zespół podczas spotkania"
-                            class="w-full object-cover hover:scale-[1.02] transition-transform duration-700"
+                            class="w-full object-cover hover:scale-[1.02] transition-transform duration-700 rounded-xl"
                             :style="{ 'aspectRatio': '16/10' }"
                         />
                     </div>
