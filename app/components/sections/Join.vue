@@ -74,11 +74,11 @@ const onSubmit = handleSubmit((values) => {
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-8 items-start">
 
                 <div>
-                    <p class="font-body text-lg font-bold text-primary leading-8">Napisz do nas!</p>
+                    <!-- <p class="font-body text-lg font-bold text-primary leading-8">Napisz do nas!</p> -->
 
                     <h2 class="mt-6 font-display font-extrabold text-4xl lg:text-5xl text-foreground leading-[1.08] tracking-[-0.03em] mb-6">
-                        Zmień swoje<br />
-                        <span class="text-primary">miasto</span>
+                        Zapraszamy do<br />
+                        <span class="text-primary">współpracy</span>
                     </h2>
 
                     <p class="font-body text-muted-foreground text-lg leading-relaxed mb-10">
