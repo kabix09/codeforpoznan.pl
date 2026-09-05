@@ -68,7 +68,7 @@ const onSubmit = handleSubmit((values) => {
 </script>
 
 <template>
-    <section id="dolacz-do-nas" class="py-24 bg-surface-light border-t border-border-subtle relative">
+    <section id="dolacz-do-nas" class="py-12 lg:py-24 bg-surface-light relative">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-start">
                 
@@ -109,8 +109,8 @@ const onSubmit = handleSubmit((values) => {
                             :class="[
                                 'w-[calc(50%-2rem)] py-3.5 text-sm font-display font-bold transition-all rounded-t-xl border-t border-x text-center',
                                 formType === 'join'
-                                    ? 'bg-white border-border-subtle text-primary relative z-10 -mb-[1px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)]'
-                                    : 'bg-surface-mid border-transparent text-text-muted hover:text-text-main'
+                                    ? 'bg-form border-border-subtle text-primary relative z-10 -mb-[1px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)]'
+                                    : 'bg-form-tab-inactive border-transparent text-text-muted hover:text-text-main'
                             ]"
                         >
                             Dołącz do zespołu
@@ -123,8 +123,8 @@ const onSubmit = handleSubmit((values) => {
                             :class="[
                                 'w-[calc(50%-2rem)] py-3.5 text-sm font-display font-bold transition-all rounded-t-xl border-t border-x text-center',
                                 formType === 'issue'
-                                    ? 'bg-white border-border-subtle text-primary relative z-10 -mb-[1px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)]'
-                                    : 'bg-surface-mid border-transparent text-text-muted hover:text-text-main'
+                                    ? 'bg-form border-border-subtle text-primary relative z-10 -mb-[1px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)]'
+                                    : 'bg-form-tab-inactive border-transparent text-text-muted hover:text-text-main'
                             ]"
                         >
                             Zgłoś problem
@@ -132,7 +132,7 @@ const onSubmit = handleSubmit((values) => {
                     </div>
 
                     <!-- Karta formularza -->
-                    <div class="bg-white border border-border-subtle rounded-xl rounded-t-none p-8 pt-8 lg:p-10 shadow-xl shadow-text-main/5 relative z-20">
+                    <div class="bg-form border border-border-subtle rounded-xl rounded-t-none p-8 pt-8 lg:p-10 shadow-xl shadow-text-main/5 relative z-20">
                         <div class="grid grid-cols-1 grid-rows-1 items-center h-full">
                             
                             <!-- Sukces -->
@@ -159,7 +159,8 @@ const onSubmit = handleSubmit((values) => {
                                                 id="form_name"
                                                 v-bind="field"
                                                 type="text"
-                                                class="font-body bg-surface-light border rounded-lg text-text-main px-4 py-3.5 text-sm focus:outline-none transition-all placeholder:text-text-light focus:bg-white focus:ring-4 focus:ring-primary/10"
+                                                class="font-body bg-surface-light border rounded-lg text-text-main px-4 py-3.5 text-sm 
+                                                        focus:outline-none transition-colors placeholder:text-text-light"
                                                 :class="errorMessage ? 'border-red-500' : 'border-border-subtle focus:border-primary'"
                                                 placeholder="Jan Kowalski"
                                             />
@@ -174,7 +175,8 @@ const onSubmit = handleSubmit((values) => {
                                                 id="form_email"
                                                 v-bind="field"
                                                 type="email"
-                                                class="font-body bg-surface-light border rounded-lg text-text-main px-4 py-3.5 text-sm focus:outline-none transition-all placeholder:text-text-light focus:bg-white focus:ring-4 focus:ring-primary/10"
+                                                class="font-body bg-surface-light border rounded-lg text-text-main px-4 py-3.5 text-sm 
+                                                        focus:outline-none transition-colors placeholder:text-text-light"
                                                 :class="errorMessage ? 'border-red-500' : 'border-border-subtle focus:border-primary'"
                                                 placeholder="jan@example.com"
                                             />
@@ -182,7 +184,24 @@ const onSubmit = handleSubmit((values) => {
                                         <span v-if="errors.email" class="text-red-500 text-xs font-semibold">{{ errors.email }}</span>
                                     </div>
 
-                                    <!-- ... analogicznie dla telefonu i wiadomości ... (zmieniając bg-background na bg-surface-light oraz border na border-border-subtle) -->
+                                    <div v-if="formType === 'issue'" class="flex flex-col gap-1.5">
+                                        <label for="form_phone" class="font-bold text-text-main text-sm">
+                                            Telefon (opcjonalnie)
+                                        </label>
+                                        <Field name="phone" v-slot="{ field, errorMessage }">
+                                            <!-- text-[#B8B2A8] -->
+                                            <input
+                                                id="form_phone"
+                                                v-bind="field"
+                                                type="tel"
+                                                class="font-body bg-surface-light border rounded-lg px-4 py-3 text-sm 
+                                                        focus:outline-none transition-colors placeholder:text-text-light"
+                                                :class="errorMessage ? 'border-red-500' : 'border-border-subtle focus:border-primary'"
+                                                placeholder="+48 123 456 789"
+                                            />
+                                        </Field>
+                                        <span v-if="errors.phone" class="text-red-500 text-xs mt-0.5">{{ errors.phone }}</span>
+                                    </div>
 
                                     <div v-if="formType === 'join'" class="flex flex-col gap-2">
                                         <label class="font-bold text-text-main text-sm">Twoja rola</label>
@@ -197,7 +216,7 @@ const onSubmit = handleSubmit((values) => {
                                                     'text-left p-4 border rounded-xl transition-all',
                                                     selected.includes(id)
                                                     ? 'border-primary bg-primary-soft ring-1 ring-primary'
-                                                    : 'border-border-subtle hover:border-primary/50 bg-white'
+                                                    : 'border-border-subtle hover:border-primary/50 bg-surface-light'
                                                 ]"
                                             >
                                                 <component 
@@ -211,9 +230,27 @@ const onSubmit = handleSubmit((values) => {
                                         </div>
                                     </div>
 
+                                    <div v-if="formType === 'issue'" class="flex flex-col gap-1.5">
+                                        <label for="form_message" class="font-body text-foreground text-sm font-medium">
+                                            Wiadomość *
+                                        </label>
+                                        <Field name="message" v-slot="{ field, errorMessage }">
+                                            <textarea
+                                                id="form_message"
+                                                v-bind="field"
+                                                rows="4"
+                                                class="font-body bg-surface-light border rounded-lg px-4 py-3 text-sm 
+                                                        focus:outline-none transition-colors resize-none"
+                                                :class="errorMessage ? 'border-red-500' : 'border-border-subtle focus:border-primary'"
+                                                placeholder="Opisz napotkany problem..."
+                                            ></textarea>
+                                        </Field>
+                                        <span v-if="errors.message" class="text-red-500 text-xs mt-0.5">{{ errors.message }}</span>
+                                    </div>
+
                                     <button
                                         type="submit"
-                                        class="mt-4 font-display font-extrabold bg-text-main text-white rounded-xl px-8 py-4 text-sm hover:bg-primary transition-all duration-300 shadow-lg shadow-text-main/10 hover:-translate-y-1 hover:shadow-primary/30"
+                                        class="mt-4 font-display font-extrabold bg-button-submit text-text-main hover:text-white rounded-xl px-8 py-4 text-sm hover:bg-primary transition-all duration-300 shadow-lg shadow-text-main/10 hover:-translate-y-1 hover:shadow-primary/30"
                                     >
                                         {{ formType === 'join' ? 'Dołącz do zespołu' : 'Wyślij zgłoszenie' }}
                                     </button>
