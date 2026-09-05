@@ -49,7 +49,7 @@ const year = new Date().getFullYear()
 
 <template>
      <!-- foreground const for dark and light modes -->
-    <footer id="wolontariat" class="bg-footer">
+    <footer id="wolontariat" class="bg-footer rounded-tl-[40px]  rounded-tr-[40px]">
         <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                 <div class="flex items-center gap-2.5 mb-5">
@@ -62,7 +62,8 @@ const year = new Date().getFullYear()
                     </span>
                 </div>
 
-                <p class="font-body text-muted-foreground text-sm leading-relaxed mb-6">
+                <p class="font-body text-text-muted text-sm leading-relaxed mb-6"
+                >
                     Społeczność civic tech działająca na rzecz organizacji społecznych.
                     Część sieci Code for All.
                 </p>
@@ -77,7 +78,7 @@ const year = new Date().getFullYear()
                         :aria-label="social.label"
                         :title="`Odwiedź profil na ${social.label}`"
                         @click="trackJoin(`footer_${social.label.toLowerCase()}`)"
-                        class="w-8 h-8 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
+                        class="w-8 h-8 border border-white/10 flex items-center justify-center text-text-muted hover:text-primary hover:border-primary/40 transition-all"
                     >
                         <component :is="social.icon" />
                     </a>
@@ -92,7 +93,7 @@ const year = new Date().getFullYear()
                     <li v-for="l in links" :key="l">
                         <a 
                             :href="l.href"
-                            class="font-body text-muted-foreground hover:text-white text-sm transition-colors"
+                            class="font-body text-text-muted hover:text-white text-sm transition-colors"
                         >
                             {{ l.label }}
                         </a>
@@ -104,8 +105,8 @@ const year = new Date().getFullYear()
                 <p class="font-mono text-[#7A8A96]/50 text-xs uppercase tracking-[0.2em] mb-5">
                     Kontakt
                 </p>
-                <p class="font-body text-muted-foreground text-sm mb-1">hello@codeforpoznan.pl</p>
-                <p class="font-body text-muted-foreground text-sm mb-8">Poznań, Polska</p>
+                <p class="font-body text-text-muted text-sm mb-1">hello@codeforpoznan.pl</p>
+                <p class="font-body text-text-muted text-sm mb-8">Poznań, Polska</p>
                 <a
                     href="#dolacz-do-nas"
                     @click="trackJoin('footer_support')"
@@ -118,8 +119,8 @@ const year = new Date().getFullYear()
 
         <div class="border-t border-[#ffffff]/8">
             <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
-                <span class="font-mono text-white/20 text-xs">© {{ year }} Code for Poznań · MIT License</span>
-                <span class="font-mono text-white/20 text-xs">Built with ❤ by volunteers</span>
+                <span class="font-mono text-text-muted text-xs">© {{ year }} Code for Poznań · MIT License</span>
+                <span class="font-mono text-text-muted text-xs">Built with ❤ by volunteers</span>
             </div>
         </div>
     </footer>

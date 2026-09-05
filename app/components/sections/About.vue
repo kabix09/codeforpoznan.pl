@@ -3,8 +3,7 @@ import pillars from '~/constants/pilars'
 </script>
 
 <template>
-    
-    <section id="o-nas" class="bg-surface-light py-24 lg:py-32  border-border-subtle">
+    <section id="o-nas" class="bg-surface-light py-24 pb-12 lg:py-32 lg:pb-24 border-border-subtle">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 class="absolute w-fit font-display font-extrabold text-4xl tracking-tight text-text-main sm:text-4.5xl leading-tight"
                 :style="{ transform: 'translateY(-8rem)'}">

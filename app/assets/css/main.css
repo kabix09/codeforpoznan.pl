@@ -28,8 +28,12 @@
   --text-muted: #475569;      /* Ciemny szary do tekstów */
   --text-light: #94A3B8;      /* Jasny szary (drobny druk, ikony) */
 
+  --text-kpi: var(--text-main);
+
+  --button-arrow: #FFFFFF;
+
   /* Zmienne systemowe UI (zmapowane na naszą paletę) */
-  --background: var(--bg-base);
+  --background: var(--surface-light); /* ?? */
   --foreground: var(--text-main);
   --card: var(--bg-base);
   --card-foreground: var(--text-main);
@@ -46,6 +50,12 @@
   --border: var(--border-subtle);
   --input: var(--border-subtle);
   --ring: var(--primary);
+
+  --comunity: var(--bg-base); /* ok */
+  --footer: var(--text-main); /* ok */
+  --form: var(--bg-base); /* ok */
+  --form-tab-inactive: var(--surface-mid);
+  --button-submit: var(--surface-mid);
 }
 
 .dark {
@@ -69,8 +79,12 @@
   --text-muted: #94A3B8;      /* Jasnoszary (slate-400) do akapitów */
   --text-light: #64748B;      /* Ciemniejszy szary (slate-500) na detale */
 
+  --text-kpi: #0F172A;
+
+  --button-arrow: var(--surface-mid);
+
   /* Zmienne systemowe UI (Dark Mode) - mapowanie na naszą nową paletę */
-  --background: var(--bg-base);
+  --background: var(--surface-light); /* ?? */
   --foreground: var(--text-main);
   --card: var(--surface-light);
   --card-foreground: var(--text-main);
@@ -87,9 +101,14 @@
   --border: var(--border-subtle);
   --input: var(--border-subtle);
   --ring: var(--primary);
-  
+
+  --comunity: var(--bg-base); /* ok */
+  --footer: var(--bg-base); /* ok */
+  --form: var(--surface-mid); /* ok */
+  --form-tab-inactive: var(--bg-base);
+  --button-submit: #0F172A;
+
   /* Pozostawione zmienne specyficzne dla Twoich komponentów/wykresów */
-  --footer: var(--bg-base);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);

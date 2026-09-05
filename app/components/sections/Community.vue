@@ -44,10 +44,10 @@ const rightSocials = [
 </script>
 
 <template>
-    <section id="spolecznosc" class="relative bg-background pt-24 lg:pt-24 overflow-hidden border-t border-border flex flex-col items-center">
-        
+    <section id="spolecznosc" class="relative z-20 bg-comunity pt-24 lg:pt-32 border-t border-border flex flex-col items-center">
+
         <div class="absolute top-16 sm:top-18 md:top-20 z-30 w-full flex justify-center px-6">
-            <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground px-4 sm:px-6 bg-background/10 backdrop-blur-md rounded-2xl">
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground px-4 sm:px-6 rounded-2xl">
                 Connect With Our Community
             </h2>
         </div>
@@ -109,7 +109,7 @@ const rightSocials = [
             <div class="relative w-full h-[480px] sm:h-[360px]"
                  :style="{ maxWidth: circleConfig.right.containerWidth }">
                 
-                <div class="absolute inset-0 overflow-hidden flex justify-center">
+                <div class="absolute inset-0 flex justify-center">
                     <div class="absolute top-12 sm:top-14 md:top-16 soap-bubble bubble-orange"
                          :style="{ width: circleConfig.right.circleSize, height: circleConfig.right.circleSize }">
                     </div>
@@ -147,7 +147,8 @@ const rightSocials = [
 
 <style scoped>
 /* 
-  ORGANICZNE BAŃKI MYDLANE 
+    SOAP BUBBLE EFFECT
+    Inspired by: https://codepen.io/
 */
 .soap-bubble {
     position: relative;
@@ -159,12 +160,12 @@ const rightSocials = [
     );
     border: 1px solid rgba(255, 255, 255, 0.2);
     
-    /* Złamanie idealnego koła + Animacja falowania (wobble) */
+    /* Breaking the perfect circle + Wobble animation */
     border-radius: 48% 52% 54% 46% / 51% 49% 53% 47%;
     animation: wobble 8s ease-in-out infinite alternate;
 }
 
-/* Wewnętrzny blik świetlny również musi falować razem z bańką */
+/* Inner light reflection also needs to wobble with the bubble */
 .soap-bubble::after {
     content: '';
     position: absolute;
@@ -193,11 +194,14 @@ const rightSocials = [
         inset -15px -25px 60px rgba(26, 167, 240, 0.3), 
         inset 0 0 20px rgba(255, 255, 255, 0.3),
         0 0 40px rgba(245, 158, 11, 0.15);
-    /* Prawej bańce dajemy lekkie opóźnienie, by falowała niezależnie */
+    /* Right bubble has a slight delay to wobble independently */
     animation-delay: -3s;
 }
 
-/* Animacja falowania (organiczny kształt) */
+/* 
+    Wobble animation to make the bubbles look more organic and alive.
+    The percentages control the border-radius at different keyframes.
+*/
 @keyframes wobble {
     0% { border-radius: 48% 52% 54% 46% / 51% 49% 53% 47%; }
     50% { border-radius: 54% 46% 48% 52% / 49% 51% 47% 53%; }
@@ -205,7 +209,7 @@ const rightSocials = [
 }
 
 /* 
-  GRADIENTOWE HOVERY PRZYCISKÓW
+  Gradient hover effects for the social buttons to make them more visually appealing.
 */
 .social-btn-blue:hover {
     /* Gradient: błękitny -> bursztynowy */

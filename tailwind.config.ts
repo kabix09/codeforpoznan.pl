@@ -34,7 +34,21 @@ export default {
           main: "var(--text-main)",
           muted: "var(--text-muted)",
           light: "var(--text-light)",
-        }
+          kpi: "var(--text-kpi)",
+        },
+        button: {
+          arrow: "var(--button-arrow)",
+          submit: "var(--button-submit)",
+        },
+        footer: "var(--footer)",
+        background: "var(--background)",
+        comunity: "var(--comunity)",
+        form: {
+          DEFAULT: "var(--form)",
+          tab: {
+            inactive: "var(--form-tab-inactive)",
+          },
+        },
       },
       fontFamily: {
         display: ['"Plus Jakarta Sans"', 'sans-serif'],
