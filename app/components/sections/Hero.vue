@@ -74,10 +74,11 @@ const stats = [
                 </div>
 
                 <!-- Pływająca karta oparta o wielokolorowość i hierarchię szarości -->
-                <div class="absolute -bottom-10 -left-16 bg-white border border-border-subtle rounded-2xl p-6 shadow-xl z-20 w-[90%] max-w-[400px]">
-                    <div class="flex justify-between items-center divide-x divide-border-subtle">
+                <!-- stały kolor dla obramwoania  -->
+                <div class="absolute -bottom-10 -left-16 bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-xl z-20 w-[90%] max-w-[400px]">
+                    <div class="flex justify-between items-center divide-x divide-[#E2E8F0]">
                         <div v-for="s in stats" :key="s.label" class="px-4 w-full text-center">
-                            <div class="text-3xl font-extrabold text-text-main mb-0.5">
+                            <div class="text-3xl font-extrabold text-text-kpi mb-0.5">
                                 {{ s.n }}
                             </div>  
                             <div class="text-[10px] uppercase tracking-wider text-text-light font-bold">
