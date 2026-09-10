@@ -90,7 +90,7 @@ const closeMenu = () => {
                         href="#dolacz-do-nas"
                         @click="trackJoin('nav_support_desktop')"
                         :style="{ fontWeight: 700 }"
-                        class="font-display font-bold bg-primary text-white px-5 py-2 text-sm hover:bg-primary-active transition-colors"
+                        class="font-display font-bold bg-primary rounded-md text-white px-5 py-2 text-sm hover:bg-primary-active transition-colors"
                     >
                         Wesprzyj nas
                     </a>

@@ -8,116 +8,146 @@
 */
 
 :root {
-  --font-size: 16px;
-  --footer: #0D1B2A;
-  --background: #ffffff; /* ok */
-  --foreground: #0D1B2A; /* ok */
-  --card: #ffffff;
-  --card-foreground: #0D1B2A;
-  --popover: #ffffff;
-  --popover-foreground: #0D1B2A;
-  --primary: #1AA7F0; /* ok */
-  --primary-active: #0E8FD4; /* ok */
-  --primary-foreground: #ffffff;
-  --secondary: #F7F6F3; /* ok */ /* tło brudny beż */
-/* dfa700 - oranż :) */
-  --secondary-foreground: #0D1B2A;
-  --muted: #F7F6F3;
-  --muted-foreground: #7A8A96; /* ok*/
-  --accent: #1AA7F0;
-  --accent-foreground: #ffffff;
-  --destructive: #e53e3e;
-  --destructive-foreground: #ffffff;
-  --border: #E4E2DC;  /* ok*/
-      /* # F4F8FB - white grey / muted */
+  /* Tła i powierzchnie */
+  --bg-base: #FFFFFF;         /* Czysta biel na główne tło */
+  --surface-light: #F8FAFC;   /* Bardzo jasny, chłodny szary (pod tła sekcji/kształty) */
+  --surface-mid: #F1F5F9;     /* Nieco ciemniejszy szary (np. na nieaktywne tagi) */
+  --border-subtle: #E2E8F0;   /* Delikatne ramki */
 
-  --input: transparent;
-  --input-background: #F7F6F3;
-  --switch-background: #C8C4BB;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --ring: #1AA7F0;
-  --radius: 6px;
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Kolor przewodni (Zimny) */
+  --primary: #1AA7F0;
+  --primary-hover: #0E8FD4;
+  --primary-soft: #E8F6FE;    /* Rozwodniony błękit pod tagi/akcenty */
+
+  /* Akcent (Ciepły - nawiązanie do pomarańczy z obraz_2.png) */
+  --accent: #F59E0B;          /* Ciepły bursztyn/żółto-pomarańczowy */
+  --accent-soft: #FEF3C7;     /* Rozwodniony bursztyn */
+
+  /* Typografia i ciemne elementy (Grafit zamiast czerni) */
+  --text-main: #0F172A;       /* Bardzo głęboki grafit */
+  --text-muted: #475569;      /* Ciemny szary do tekstów */
+  --text-light: #94A3B8;      /* Jasny szary (drobny druk, ikony) */
+
+  --text-kpi: var(--text-main);
+
+  --button-arrow: #FFFFFF;
+
+  /* Zmienne systemowe UI (zmapowane na naszą paletę) */
+  --background: var(--surface-light); /* ?? */
+  --foreground: var(--text-main);
+  --card: var(--bg-base);
+  --card-foreground: var(--text-main);
+  --popover: var(--bg-base);
+  --popover-foreground: var(--text-main);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--surface-light);
+  --secondary-foreground: var(--text-main);
+  --muted: var(--surface-mid);
+  --muted-foreground: var(--text-muted);
+  --accent-foreground: #FFFFFF;
+  --destructive: oklch(0.637 0.237 25.331);
+  --destructive-foreground: #FFFFFF;
+  --border: var(--border-subtle);
+  --input: var(--border-subtle);
+  --ring: var(--primary);
+
+  --comunity: var(--bg-base); /* ok */
+  --footer: var(--text-main); /* ok */
+  --form: var(--bg-base); /* ok */
+  --form-tab-inactive: var(--surface-mid);
+  --button-submit: var(--surface-mid);
 }
 
 .dark {
-  --footer: oklch(0.269 0 0);
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: #1AA7F0; /*oklch(0.985 0 0);*/
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Tła i powierzchnie (Dark Mode) */
+  --bg-base: #0B1120;         /* Bardzo głęboki, chłodny granat (Midnight Slate) */
+  --surface-light: #151E2E;   /* Ciemny, zgaszony błękitno-szary na karty i panele */
+  --surface-mid: #1E293B;     /* Nieco jaśniejszy szary na elementy interaktywne */
+  --border-subtle: #2A3A4C;   /* Widoczne, ale przygaszone ciemne ramki */
+
+  /* Kolor przewodni - zachowujemy błękit, lekko rozjaśniamy hover dla efektu "glow" */
+  --primary: #1AA7F0;
+  --primary-hover: #38BDF8;   
+  --primary-soft: #142838;    /* Głęboki, mroczny błękit pod tagi */
+
+  /* Akcent - pomarańcz zostaje, zmienia się tylko tło taga */
+  --accent: #F59E0B;          
+  --accent-soft: #2D2210;     /* Mroczny bursztyn pod tagi */
+
+  /* Typografia (Odwrócenie kolorów) */
+  --text-main: #F8FAFC;       /* Złamana biel do nagłówków - nie "razi" w oczy */
+  --text-muted: #94A3B8;      /* Jasnoszary (slate-400) do akapitów */
+  --text-light: #64748B;      /* Ciemniejszy szary (slate-500) na detale */
+
+  --text-kpi: #0F172A;
+
+  --button-arrow: var(--surface-mid);
+
+  /* Zmienne systemowe UI (Dark Mode) - mapowanie na naszą nową paletę */
+  --background: var(--surface-light); /* ?? */
+  --foreground: var(--text-main);
+  --card: var(--surface-light);
+  --card-foreground: var(--text-main);
+  --popover: var(--surface-light);
+  --popover-foreground: var(--text-main);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--surface-mid);
+  --secondary-foreground: var(--text-main);
+  --muted: var(--surface-light);
+  --muted-foreground: var(--text-muted);
+  --accent-foreground: #FFFFFF;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0); /* TODO */
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
+  --border: var(--border-subtle);
+  --input: var(--border-subtle);
+  --ring: var(--primary);
+
+  --comunity: var(--bg-base); /* ok */
+  --footer: var(--bg-base); /* ok */
+  --form: var(--surface-mid); /* ok */
+  --form-tab-inactive: var(--bg-base);
+  --button-submit: #0F172A;
+
+  /* Pozostawione zmienne specyficzne dla Twoich komponentów/wykresów */
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar: var(--surface-light);
+  --sidebar-foreground: var(--text-main);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--surface-mid);
+  --sidebar-accent-foreground: var(--text-main);
+  --sidebar-border: var(--border-subtle);
+  --sidebar-ring: var(--primary);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring;
-
     scrollbar-width: thin; 
-    scrollbar-color: var(--primary) #F4F8FB; /* var(--secondary); */
+    scrollbar-color: var(--primary) var(--bg-base);
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-base text-text-main;
   }
 
   html {
-    font-size: var(--font-size);
+    font-size: var(--font-size, 16px);
     scroll-behavior: smooth;
   }
 
   ::-webkit-scrollbar { 
-    width: 4px; 
+    width: 6px; 
   }
   ::-webkit-scrollbar-track { 
-    background: var(--secondary); 
+    background: var(--surface-light); 
   }
   ::-webkit-scrollbar-thumb { 
     background: var(--primary); 
-    border-radius: 4px; 
+    border-radius: 6px; 
   }
 
   h1 {

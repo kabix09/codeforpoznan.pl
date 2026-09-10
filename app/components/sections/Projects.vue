@@ -1,33 +1,27 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { X, ExternalLink, ArrowUpRight, ChevronLeft, ChevronRight } from "@lucide/vue";
-import TimelineCard from '~/components/layout/TimelineCard.vue'
+import { ExternalLink, ArrowUpRight, ChevronLeft, ChevronRight, Link2 } from "@lucide/vue";
 import TimelinePopup from '~/components/layout/TimelinePopup.vue'
+
+// Importy Swiper Vue
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
 
 import projects from '~/constants/projects'
 import type Project from '~/types/projects'
-
 import { useTracking } from '~/composables/useTracking'
 
 const { trackProjectsScroll, trackGithub, trackProjectOpen } = useTracking()
 
-// Definicje typów i danych (zakładając, że projects i projectImages są zaimportowane)
 const active = ref<Project | null>(null);
+const swiperInstance = ref<any>(null);
 
-const CARD_W = 300;
-const CARD_GAP = 32;
-const STEP = CARD_W + CARD_GAP;
-
-const scrollRef = ref<HTMLElement | null>(null);
-
-const scroll = (dir: "left" | "right") => {
-  if (!scrollRef.value) return;
-  scrollRef.value.scrollBy({
-    left: dir === "right" ? STEP * 2 : -STEP * 2,
-    behavior: "smooth",
-  });
-
-  trackProjectsScroll();
+// Przechwycenie instancji Swipera, aby obsługiwać własne przyciski strzałek
+const onSwiper = (swiper: any) => {
+  swiperInstance.value = swiper;
 };
 
 const handleOpenProject = (p: Project) => {
@@ -36,144 +30,135 @@ const handleOpenProject = (p: Project) => {
 }
 </script>
 
-<style>
-.hide-scroll::-webkit-scrollbar {
-  display: none;
+<style scoped>
+/* Dodatkowy styl dla kropek paginacji (aby pasowały do Twojego designu) */
+:deep(.swiper-pagination-bullet) {
+  background-color: #bcbac3;
+  opacity: 0.5;
+}
+:deep(.swiper-pagination-bullet-active) {
+  background-color: var(--primary); /* Kolor primary z Twojego wzoru */
+  opacity: 1;
 }
 </style>
 
 <template>
-  <section id="nasze-projekty" class="bg-secondary py-24 lg:py-24 border-t border-border">
+  <section id="nasze-projekty" class="bg-surface-light py-12 lg:py-24 lg:pb-12 overflow-hidden">
+    
     <!-- Header -->
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
       <div>
-        <p class="text-lg font-body font-semibold leading-8 text-primary">
-            <!-- font-mono text-[#7A8A96] text-xs uppercase tracking-[0.2em] mb-4 -->
-          Projekty
-        </p>
-        <h2
-          style="font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;"
-          class="font-display text-4xl lg:text-5xl text-foreground"
-        >
-          Co budujemy
+        <!-- <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-soft w-fit mb-6">
+            <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            <span class="text-primary font-bold text-xs uppercase tracking-widest">Projekty</span>
+        </div> -->
+        <h2 class="font-display font-extrabold text-4xl lg:text-5xl text-text-main tracking-tight leading-tight">
+          Nasze portfolio
         </h2>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-4 z-10 relative">
+        <!-- Strzałki sterujące Swiperem -->
         <button
-          @click="scroll('left')"
+          @click="swiperInstance?.slidePrev()"
           aria-label="Przewiń projekty w lewo"
-          class="w-10 h-10 border border-border bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
+          class="w-12 h-12 rounded-xl border-2 border-border-subtle  bg-button-arrow flex items-center justify-center text-text-light hover:border-primary hover:text-primary transition-all shadow-sm"
         >
-          <ChevronLeft :size="18" />
+          <ChevronLeft :size="20" />
         </button>
         <button
-          @click="scroll('right')"
+          @click="swiperInstance?.slideNext()"
           aria-label="Przewiń projekty w prawo"
-          class="w-10 h-10 border border-border bg-white flex items-center justify-center text-[#7A8A96] hover:border-[#0D1B2A] hover:text-[#0D1B2A] transition-all"
+          class="w-12 h-12 rounded-xl border-2 border-border-subtle  bg-button-arrow flex items-center justify-center text-text-light hover:border-primary hover:text-primary transition-all shadow-sm"
         >
-          <ChevronRight :size="18" />
+          <ChevronRight :size="20" />
         </button>
-        <a
-          href="https://github.com/CodeForPoznan"
-          target="_blank"
-          rel="noopener noreferrer"
-          @click="trackGithub('all_projects_link')"
-          style="font-weight: 600;"
-          class="font-display flex items-center gap-1.5 text-foreground text-sm hover:text-primary transition-colors"
-        >
-          Wszystkie na GitHub <ArrowUpRight :size="14" />
-        </a>
+        
+        <!-- Kontener: Napis + pasek postępu -->
+        <div class="flex flex-col ml-2">
+          <!-- Napis + Strzałka -->
+          <a
+            href="https://github.com/CodeForPoznan"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="trackGithub('all_projects_link')"
+            class="font-display font-bold flex items-center gap-2 text-text-main text-sm hover:text-primary transition-colors"
+          >
+            Wszystkie na GitHub <ArrowUpRight :size="16" />
+          </a>
+          
+          <!-- Pasek postępu / ozdobnik -->
+          <div class="h-1 w-full bg-surface-mid rounded-full mt-1.5 overflow-hidden">
+            <div class="h-full bg-accent w-3/4 rounded-full"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ── Horizontal timeline ── -->
-    <div
-        ref="scrollRef"
-        class="overflow-x-auto pb-10 hide-scroll"
-        :style="{ scrollbarWidth: 'none', msOverflowStyle: 'none' }"
-    >
-    <div
-        class="relative inline-flex flex-col"
-        :style="{
-            minWidth: `${projects.length * STEP + 96}px`,
-            paddingLeft: '48px',
-            paddingRight: '48px',
+    <!-- Swiper 3D Coverflow -->
+    <div class="w-full">
+      <Swiper
+        :modules="[EffectCoverflow, Pagination]"
+        effect="coverflow"
+        :grabCursor="true"
+        :centeredSlides="true"
+        :slidesPerView="'auto'"
+        :initialSlide="Math.floor(projects.length / 2)"
+        :coverflowEffect="{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
         }"
-    >
-        <!-- Top cards (even) -->
-        <div class="flex" :style="{ gap: `${CARD_GAP}px` }">
-        <div
-            v-for="(p, i) in projects"
-            :key="p.id"
-            :style="{ width: `${CARD_W}px`, flexShrink: 0 }"
-            class="flex flex-col items-center"
+        :pagination="{ clickable: true }"
+        @swiper="onSwiper"
+        @slideChange="trackProjectsScroll"
+        class="w-full pb-16 pt-4 px-4"
+      >
+        <!-- Karta Projektu -->
+        <SwiperSlide 
+          v-for="p in projects" 
+          :key="p.id" 
+          class="max-w-[350px] w-full mb-16"
         >
-            <TimelineCard
-                v-if="i % 2 === 0"
-                :project="p"
-                :img="p.image"
-                @open="handleOpenProject(p)"
-            />
-            <div v-else :style="{ height: '300px' }" />
-            <div
-                :class="['w-px mt-3', i % 2 === 0 ? 'bg-[#1AA7F0]/30' : 'bg-transparent']"
-                :style="{ height: '28px' }"
-            />
-        </div>
-        </div>
-
-        <!-- Axis -->
-        <div class="relative flex items-center" :style="{ height: '28px' }">
-          <div class="absolute inset-y-1/2 left-0 right-0 h-px bg-[#E4E2DC]" />
-          <div class="relative flex w-full" :style="{ gap: `${CARD_GAP}px` }">
-            <div
-                v-for="p in projects"
-                :key="p.id"
-                :style="{ width: `${CARD_W}px`, flexShrink: 0 }"
-                class="flex flex-col items-center relative"
-            >
-            <button
-                @click="handleOpenProject(p)"
-                class="w-4 h-4 rounded-full border-2 border-[#1AA7F0] bg-white hover:bg-[#F7F6F3] transition-colors relative z-10 flex-shrink-0 shadow-sm shadow-[#1AA7F0]/20"
-                :aria-label="`Wybierz projekt: ${p.name}`"
-            />
-            <span
-                class="font-mono absolute top-5 text-[#1AA7F0] text-[10px] whitespace-nowrap left-1/2 -translate-x-1/2"
-            >
-                {{ p.date }}
-            </span>
+          <div class="bg-surface-light rounded-md h-[500px] p-5 text-center flex flex-col border border-border-subtle shadow-2xl">
+            
+            <!-- Obrazek z overlayem (efekt z ikonką na hover) -->
+            <div class="relative inline-block mx-auto mb-4 group overflow-hidden rounded cursor-pointer" @click="handleOpenProject(p)">
+              <img :src="p.image" :alt="p.name" class="w-full h-40 object-cover rounded transition-transform duration-500 group-hover:scale-110">
+              <div class="absolute inset-0 bg-[#211b46]/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Link2 class="text-white w-12 h-12" />
+              </div>
             </div>
+
+            <!-- Tytuł -->
+            <h4 class="text-text-main font-bold text-xl mb-1">
+              {{ p.name }}
+            </h4>
+            
+            <!-- Rok i Technologie (Dostosuj pola do swojego interfejsu Project) -->
+            <h6 class="text-text-muted text-sm mb-4">
+              {{ p.date }} | {{ p.tech || 'Technologie' }}
+            </h6>
+            
+            <!-- Opis -->
+            <p class="text-text-muted text-sm line-clamp-5 mb-auto">
+              {{ p.description }}
+            </p>
+
+            <!-- Przycisk View -->
+            <button 
+              @click="handleOpenProject(p)"
+              class="mt-4 mx-auto flex items-center justify-center gap-2 border border-border-subtle text-text-main hover:bg-surface-mid transition-colors py-2 px-6 rounded-md font-medium text-sm transition-all duration-300 shadow-md"
+            >
+              Wyświetl <Link2 class="w-4 h-4" />
+            </button>
           </div>
-        </div>
-
-        <!-- Bottom cards (odd) -->
-        <div class="flex" :style="{ gap: `${CARD_GAP}px` }">
-        <div
-            v-for="(p, i) in projects"
-            :key="p.id"
-            :style="{ width: `${CARD_W}px`, flexShrink: 0 }"
-            class="flex flex-col items-center"
-        >
-            <div
-                :class="['w-px mb-3', i % 2 !== 0 ? 'bg-[#1AA7F0]/30' : 'bg-transparent']"
-                :style="{ height: '28px' }"
-            />
-            <TimelineCard
-                v-if="i % 2 !== 0"
-                :project="p"
-                :img="p.image"
-                @open="handleOpenProject(p)"
-            />
-            <div v-else :style="{ height: '300px' }" />
-        </div>
-        </div>
-    </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
 
-    <TimelinePopup 
-      :project="active" 
-      @close="active = null" 
-    />
+    <TimelinePopup :project="active" @close="active = null" />
   </section>
 </template>
